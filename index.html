@@ -1,0 +1,181 @@
+<!--
+    Jaiden Leonard
+    CPSC 20000
+    jaidentleonard@lewisu.edu
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+  <link rel="stylesheet" href="MatchMaker.css">
+  <style>
+    body{padding-left:100px;padding-right:100px;padding-top:100px;padding-bottom:100px;}
+  </style>
+</head>
+
+
+
+<body style="background-color:lightskyblue">
+	<h1>Are we compatible?</h1>
+	<p> 
+    Welcome my love, today you will be taking a test to see how pure our love can be! Please answer the questions in the form 
+    of strongly disagree to strongly agree. To select an option, use the dropdown bar and select which answer suit you best. At the end, 
+    click the calculate button to show our total compatibility percentage. But be careful, this relationship is within your grasp. 
+    Don't be foolish, answer them honestly. I will be awaiting your response!
+  </p>
+
+
+
+  <!-- Start of questions and dropdowns (Used help with MatchMaker2 template) -->
+	<label>Hockey is the best sport to watch.</label><br />
+	<select id="ques1">
+		<option value="5">Strongly Agree</option>
+		<option value="4">Agree</option>
+		<option value="3">In the middle</option>
+		<option value="2">Disagree</option>
+		<option value="1">Strongly Disagree</option>
+	</select>
+	<br /><br />
+
+	<label>Working on and modifying cars is a fun hobby and past-time.</label><br />
+	<select id="ques2">
+		<option value="5">Strongly Agree</option>
+		<option value="4">Agree</option>
+		<option value="3">In the middle</option>
+		<option value="2">Disagree</option>
+		<option value="1">Strongly Disagree</option>
+	</select>
+	<br /><br />
+
+	<label>Video games can be relaxing and enjoyable to play.</label><br />
+	<select id="ques3">
+		<option value="5">Strongly Agree</option>
+		<option value="4">Agree</option>
+		<option value="3">In the middle</option>
+		<option value="2">Disagree</option>
+		<option value="1">Strongly Disagree</option>
+	</select>
+	<br /><br />
+
+	<label>Dogs are the best pets to exist.</label><br />
+	<select id="ques4">
+		<option value="5">Strongly Agree</option>
+		<option value="4">Agree</option>
+		<option value="3">In the middle</option>
+		<option value="2">Disagree</option>
+		<option value="1">Strongly Disagree</option>
+	</select>
+	<br /><br />
+
+	<label>I would like to live in a big and bustling city.</label><br />
+	<select id="ques5">
+		<option value="5">Strongly Agree</option>
+		<option value="4">Agree</option>
+		<option value="3">In the middle</option>
+		<option value="2">Disagree</option>
+		<option value="1">Strongly Disagree</option>
+	</select>
+
+	<br /><br /><br />
+	<button onclick="calculateCompatibility()">Calculate our Compatibility</button>
+	<p id="compatibility"></p>
+
+
+
+<script>
+console.log("Warming up MatchMaker");
+
+function calculateCompatibility() {
+	console.log("calculateCompatibility()");
+
+	const DESIRED_RESPONSE = [
+		4, /* agree */
+    5, /* strongly agree */
+    4, /* agree */
+		3, /* in the middle */
+		1, /* strongly disagree */
+	]
+
+	const MAX_SCORE = 25;
+
+
+
+	// Current values of the dropdown menu
+	let ques1Response = document.getElementById("ques1").selectedOptions[0].value;
+	let ques2Response = document.getElementById("ques2").selectedOptions[0].value;
+	let ques3Response = document.getElementById("ques3").selectedOptions[0].value;
+	let ques4Response = document.getElementById("ques4").selectedOptions[0].value;
+	let ques5Response = document.getElementById("ques5").selectedOptions[0].value;
+
+
+
+	// IDK if we need to log them to the console so I will add it in anyways
+	console.log("Question 1 Answers:")
+	console.log(document.getElementById("ques1").selectedOptions[0].text);
+	console.log(document.getElementById("ques1").selectedOptions[0].value);
+	console.log(ques1Response);
+
+	console.log("Question 2 Answers:");
+	console.log(document.getElementById("ques2").selectedOptions[0].text);
+	console.log(document.getElementById("ques2").selectedOptions[0].value);
+	console.log(ques2Response);
+
+	console.log("Question 3 Answers:");
+	console.log(document.getElementById("ques3").selectedOptions[0].text);
+	console.log(document.getElementById("ques3").selectedOptions[0].value);
+	console.log(ques3Response);
+
+  console.log("Question 4 Answers:");
+	console.log(document.getElementById("ques4").selectedOptions[0].text);
+	console.log(document.getElementById("ques4").selectedOptions[0].value);
+	console.log(ques4Response);
+
+  console.log("Question 5 Answers:");
+	console.log(document.getElementById("ques5").selectedOptions[0].text);
+	console.log(document.getElementById("ques5").selectedOptions[0].value);
+	console.log(ques5Response);
+
+
+
+	// Calculates single question compatability
+	let ques1Compatibility = 5 - Math.abs(ques1Response - DESIRED_RESPONSE[0]);
+	let ques2Compatibility = 5 - Math.abs(ques2Response - DESIRED_RESPONSE[1]);
+	let ques3Compatibility = 5 - Math.abs(ques3Response - DESIRED_RESPONSE[2]);
+  let ques4Compatibility = 5 - Math.abs(ques4Response - DESIRED_RESPONSE[3]);
+  let ques5Compatibility = 5 - Math.abs(ques5Response - DESIRED_RESPONSE[4]);
+
+  // Logs single question compatibility to console
+	console.log("c1="+ques1Compatibility);
+	console.log("c2="+ques2Compatibility);
+	console.log("c3="+ques3Compatibility);
+  console.log("c4="+ques4Compatibility);
+  console.log("c5="+ques5Compatibility);
+
+	// Calculates the totalCompatability score
+	let totalCompatibility = ques1Compatibility + ques2Compatibility + ques3Compatibility + ques4Compatibility + ques5Compatibility;
+
+	// Convert totalCompatibility to a percentage.
+  let compatibilityPercentage = (totalCompatibility / MAX_SCORE) * 100;
+	console.log("tc="+ totalCompatibility);
+
+	document.getElementById("compatibility").innerHTML = "Your total compatibility is: " + compatibilityPercentage + "%";
+
+  // Display message based on compatibility percentage
+	let message;
+	if (compatibilityPercentage >= 85) {
+		message = "Ayo, send me your phone number right now -jaidentleonard@lewisu.edu. We're a perfect match!";
+	} else if (compatibilityPercentage >= 65) {
+		message = "I can be able to work with this, there just might need to be some accommodations on your end...";
+	} else if (compatibilityPercentage <=64) {
+		message = "It's not you, It's me. Actually, no. It's you. You're the problem.";
+  }
+	// Display the message
+	document.getElementById("compatibility").innerHTML += "<br>" + message;
+}
+
+</script>
+</body>
+</html>
