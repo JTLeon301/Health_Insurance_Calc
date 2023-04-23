@@ -9,8 +9,8 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title></title>
-  <link rel="stylesheet" href="MatchMaker.css">
+	<title>Health Insurance Calculator</title>
+  <link rel="stylesheet" href="HealthInsurance.CSS">
   <style>
     body{padding-left:100px;padding-right:100px;padding-top:100px;padding-bottom:100px;}
   </style>
@@ -19,161 +19,184 @@
 
 
 <body style="background-color:lightskyblue">
-	<h1>Are we compatible?</h1>
+	<h1>What risk category are you in for health insurance?</h1>
 	<p> 
-    Welcome my love, today you will be taking a test to see how pure our love can be! Please answer the questions in the form 
-    of strongly disagree to strongly agree. To select an option, use the dropdown bar and select which answer suit you best. At the end, 
-    click the calculate button to show our total compatibility percentage. But be careful, this relationship is within your grasp. 
-    Don't be foolish, answer them honestly. I will be awaiting your response!
+        You will need to select the appropriate answer for each question to help determine your risk factor for health insurance.
+        To select an answer, please hit the drop down icon and select what fits best. Thank you.
   </p>
 
 
 
-  <!-- Start of questions and dropdowns (Used help with MatchMaker2 template) -->
-	<label>Hockey is the best sport to watch.</label><br />
-	<select id="ques1">
-		<option value="5">Strongly Agree</option>
-		<option value="4">Agree</option>
-		<option value="3">In the middle</option>
-		<option value="2">Disagree</option>
-		<option value="1">Strongly Disagree</option>
+  <!-- Start of questions and dropdown -->
+	<label>How tall are you?</label><br />
+	<select id="heightSelect">
+        <option value="62">5'2"-5'4"</option>
+		<option value="65">5'5"-5'7"</option>
+		<option value="68">5'8"-5'10"</option>
+		<option value="71">5'11"-6'1"</option>
+		<option value="74">6'2"+</option>
 	</select>
 	<br /><br />
 
-	<label>Working on and modifying cars is a fun hobby and past-time.</label><br />
-	<select id="ques2">
-		<option value="5">Strongly Agree</option>
-		<option value="4">Agree</option>
-		<option value="3">In the middle</option>
-		<option value="2">Disagree</option>
-		<option value="1">Strongly Disagree</option>
+	<label>How much do you weigh?</label><br />
+	<select id="weightSelect">
+        <option value="115">100-130 lbs</option>
+		<option value="145">131-160 lbs</option>
+		<option value="175">161-190 lbs</option>
+		<option value="205">191-220 lbs</option>
+		<option value="225">221+ lbs</option>
 	</select>
 	<br /><br />
 
-	<label>Video games can be relaxing and enjoyable to play.</label><br />
-	<select id="ques3">
-		<option value="5">Strongly Agree</option>
-		<option value="4">Agree</option>
-		<option value="3">In the middle</option>
-		<option value="2">Disagree</option>
-		<option value="1">Strongly Disagree</option>
+	<label>How old are you?</label><br />
+	<select id="ageSelect">
+		<option value="4">30 and under</option>
+		<option value="3">45 and under</option>
+		<option value="2">60 and under</option>
+		<option value="1">60+</option>
 	</select>
 	<br /><br />
 
-	<label>Dogs are the best pets to exist.</label><br />
-	<select id="ques4">
-		<option value="5">Strongly Agree</option>
-		<option value="4">Agree</option>
-		<option value="3">In the middle</option>
-		<option value="2">Disagree</option>
-		<option value="1">Strongly Disagree</option>
+	<label>What is your blood pressure like?</label><br />
+	<select id="pressureSelect">
+		<option value="5">Normal</option>
+		<option value="4">Elevated</option>
+		<option value="3">Stage 1</option>
+		<option value="2">Stage 2</option>
+		<option value="1">Crisis</option>
 	</select>
 	<br /><br />
 
-	<label>I would like to live in a big and bustling city.</label><br />
-	<select id="ques5">
-		<option value="5">Strongly Agree</option>
-		<option value="4">Agree</option>
-		<option value="3">In the middle</option>
-		<option value="2">Disagree</option>
-		<option value="1">Strongly Disagree</option>
+	<label>Any family history of diseases?</label><br />
+	<select id="familySelect">
+		<option value="3">Diabetes</option>
+		<option value="2">Cancer</option>
+		<option value="1">Alzheimer's</option>
 	</select>
 
 	<br /><br /><br />
-	<button onclick="calculateCompatibility()">Calculate our Compatibility</button>
-	<p id="compatibility"></p>
+	<button onclick="calculateRisk()">Calculate total score and risk category.</button>
+	<p id="totalRisk"></p>
 
 
 
 <script>
-console.log("Warming up MatchMaker");
+console.log("Finding your Insurance Risk!");
 
-function calculateCompatibility() {
-	console.log("calculateCompatibility()");
-
-	const DESIRED_RESPONSE = [
-		4, /* agree */
-    5, /* strongly agree */
-    4, /* agree */
-		3, /* in the middle */
-		1, /* strongly disagree */
-	]
-
-	const MAX_SCORE = 25;
-
-
+function calculateRisk() {
+	console.log("calculateRisk()");
 
 	// Current values of the dropdown menu
-	let ques1Response = document.getElementById("ques1").selectedOptions[0].value;
-	let ques2Response = document.getElementById("ques2").selectedOptions[0].value;
+	let ques1Response = document.getElementById("heightSelect").selectedOptions[0].value;
+	let ques2Response = document.getElementById("weightSelect").selectedOptions[0].value;
 	let ques3Response = document.getElementById("ques3").selectedOptions[0].value;
 	let ques4Response = document.getElementById("ques4").selectedOptions[0].value;
 	let ques5Response = document.getElementById("ques5").selectedOptions[0].value;
 
-
-
-	// IDK if we need to log them to the console so I will add it in anyways
+	// Log answers to console
 	console.log("Question 1 Answers:")
-	console.log(document.getElementById("ques1").selectedOptions[0].text);
-	console.log(document.getElementById("ques1").selectedOptions[0].value);
+	console.log(document.getElementById("heightSelect").selectedOptions[0].text);
+	console.log(document.getElementById("heightSelect").selectedOptions[0].value);
 	console.log(ques1Response);
 
 	console.log("Question 2 Answers:");
-	console.log(document.getElementById("ques2").selectedOptions[0].text);
-	console.log(document.getElementById("ques2").selectedOptions[0].value);
+	console.log(document.getElementById("weightSelect").selectedOptions[0].text);
+	console.log(document.getElementById("weightSelect").selectedOptions[0].value);
 	console.log(ques2Response);
 
 	console.log("Question 3 Answers:");
-	console.log(document.getElementById("ques3").selectedOptions[0].text);
-	console.log(document.getElementById("ques3").selectedOptions[0].value);
+	console.log(document.getElementById("ageSelect").selectedOptions[0].text);
+	console.log(document.getElementById("ageSelect").selectedOptions[0].value);
 	console.log(ques3Response);
 
   console.log("Question 4 Answers:");
-	console.log(document.getElementById("ques4").selectedOptions[0].text);
-	console.log(document.getElementById("ques4").selectedOptions[0].value);
+	console.log(document.getElementById("pressureSelect").selectedOptions[0].text);
+	console.log(document.getElementById("pressureSelect").selectedOptions[0].value);
 	console.log(ques4Response);
 
   console.log("Question 5 Answers:");
-	console.log(document.getElementById("ques5").selectedOptions[0].text);
-	console.log(document.getElementById("ques5").selectedOptions[0].value);
+	console.log(document.getElementById("familySelect").selectedOptions[0].text);
+	console.log(document.getElementById("familySelect").selectedOptions[0].value);
 	console.log(ques5Response);
 
+    // Calculate BMI
+    var heightInInches = document.getElementById("heightSelect").value;
+    var weightInPounds = document.getElementById("weightSelect").value;
+    var BMI = (weightInPounds / (heightInInches * heightInInches)) * 703;
+    // Initialize BMIscore
+    var BMIscore;
+    // BMI points system
+    if (BMI < 24.9) {   
+     BMIscore = 0;
+    } else if (BMI >= 25 && BMI < 29.9) {
+     BMIscore = 30;
+    } else if (BMI >=30) {
+     BMIscore = 75;
+    }
 
+    // Get ageScore
+    var Age = document.getElementById("ageSelect").value;
+    // Initialize ageScore
+    var ageScore;
+    // ageScore points system
+    if (Age = 4) {
+        ageScore = 0;
+    } else if (Age = 3) {
+        ageScore = 10;
+    } else if (Age = 2) {
+        ageScore = 20;
+    } else if (Age = 1) {
+        ageScore = 30;
+    }
 
-	// Calculates single question compatability
-	let ques1Compatibility = 5 - Math.abs(ques1Response - DESIRED_RESPONSE[0]);
-	let ques2Compatibility = 5 - Math.abs(ques2Response - DESIRED_RESPONSE[1]);
-	let ques3Compatibility = 5 - Math.abs(ques3Response - DESIRED_RESPONSE[2]);
-  let ques4Compatibility = 5 - Math.abs(ques4Response - DESIRED_RESPONSE[3]);
-  let ques5Compatibility = 5 - Math.abs(ques5Response - DESIRED_RESPONSE[4]);
+    // Get pressureScore
+    var pressure = document.getElementById("pressureSelect").value;
+    // Initialize pressureScore
+    var pressureScore;
+    // pressureScore points system
+    if (pressure = 5) {
+        pressureScore = 0;
+    } else if (pressure = 4) {
+        pressureScore = 15;
+    } else if (pressure = 3) {
+        pressureScore = 30;
+    } else if (pressure = 2) {
+        pressureScore = 75;
+    } else if (pressure = 1) {
+        pressureScore = 100;
+    }
 
-  // Logs single question compatibility to console
-	console.log("c1="+ques1Compatibility);
-	console.log("c2="+ques2Compatibility);
-	console.log("c3="+ques3Compatibility);
-  console.log("c4="+ques4Compatibility);
-  console.log("c5="+ques5Compatibility);
-
+    //get familyScore
+    var family = domcument.getElementById("familySelect").value;
+    // Initialize familyScore
+    var familyScore;
+    // familyScore points system
+    if (family = 3) {
+        familyScore = 10;
+    } else if (family = 2) {
+        familyScore = 10;
+    } else if (family = 1) {
+        familyScore = 10;
+    }
+    
 	// Calculates the totalCompatability score
-	let totalCompatibility = ques1Compatibility + ques2Compatibility + ques3Compatibility + ques4Compatibility + ques5Compatibility;
+	let totalRiskScore = BMIscore + ageScore + pressureScore + familyScore;
 
-	// Convert totalCompatibility to a percentage.
-  let compatibilityPercentage = (totalCompatibility / MAX_SCORE) * 100;
-	console.log("tc="+ totalCompatibility);
-
-	document.getElementById("compatibility").innerHTML = "Your total compatibility is: " + compatibilityPercentage + "%";
+	document.getElementById("totalRisk").innerHTML = "Your total risk score is: " + totalRiskScore;
 
   // Display message based on compatibility percentage
 	let message;
-	if (compatibilityPercentage >= 85) {
-		message = "Ayo, send me your phone number right now -jaidentleonard@lewisu.edu. We're a perfect match!";
-	} else if (compatibilityPercentage >= 65) {
-		message = "I can be able to work with this, there just might need to be some accommodations on your end...";
-	} else if (compatibilityPercentage <=64) {
-		message = "It's not you, It's me. Actually, no. It's you. You're the problem.";
+	if (totalRiskScore <=20) {
+		message = "You are at a low risk for health insurance.";
+	} else if (compatibilityPercentage <=50) {
+		message = "You are at a moderate risk for health insurance.";
+	} else if (compatibilityPercentage <=75) {
+		message = "You are at a high risk for health insurance.";
+    } else {
+        message = "You are not able to get health insurance."
   }
 	// Display the message
-	document.getElementById("compatibility").innerHTML += "<br>" + message;
+	document.getElementById("totalRisk").innerHTML += "<br>" + message;
 }
 
 </script>
