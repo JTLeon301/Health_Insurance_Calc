@@ -1,8 +1,7 @@
-<!--
+
     Jaiden Leonard
     CPSC 20000
     jaidentleonard@lewisu.edu
--->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +26,7 @@
 
 
 
-  <!-- Start of questions and dropdown -->
+	<!-- Start of questions and dropdown -->
 	<label>How tall are you?</label><br />
 	<select id="heightSelect">
         <option value="62">5'2"-5'4"</option>
@@ -89,9 +88,9 @@ function calculateRisk() {
 	// Current values of the dropdown menu
 	let ques1Response = document.getElementById("heightSelect").selectedOptions[0].value;
 	let ques2Response = document.getElementById("weightSelect").selectedOptions[0].value;
-	let ques3Response = document.getElementById("ques3").selectedOptions[0].value;
-	let ques4Response = document.getElementById("ques4").selectedOptions[0].value;
-	let ques5Response = document.getElementById("ques5").selectedOptions[0].value;
+	let ques3Response = document.getElementById("ageSelect").selectedOptions[0].value;
+	let ques4Response = document.getElementById("pressureSelect").selectedOptions[0].value;
+	let ques5Response = document.getElementById("familySelect").selectedOptions[0].value;
 
 	// Log answers to console
 	console.log("Question 1 Answers:")
@@ -120,77 +119,78 @@ function calculateRisk() {
 	console.log(ques5Response);
 
     // Calculate BMI
-    var heightInInches = document.getElementById("heightSelect").value;
-    var weightInPounds = document.getElementById("weightSelect").value;
+    var heightInInches = document.getElementById("heightSelect").selectedOptions[0].value;
+    var weightInPounds = document.getElementById("weightSelect").selectedOptions[0].value;
     var BMI = (weightInPounds / (heightInInches * heightInInches)) * 703;
     // Initialize BMIscore
     var BMIscore;
     // BMI points system
-    if (BMI < 24.9) {   
+    if (BMI <= 24.9) {   
      BMIscore = 0;
-    } else if (BMI >= 25 && BMI < 29.9) {
+    } else if (BMI >= 25 && BMI <= 29.9) {
      BMIscore = 30;
     } else if (BMI >=30) {
      BMIscore = 75;
     }
 
     // Get ageScore
-    var Age = document.getElementById("ageSelect").value;
+    var Age = document.getElementById("ageSelect").selectedOptions[0].value;
     // Initialize ageScore
     var ageScore;
     // ageScore points system
-    if (Age = 4) {
+    if (Age == 4) {
         ageScore = 0;
-    } else if (Age = 3) {
+    } else if (Age == 3) {
         ageScore = 10;
-    } else if (Age = 2) {
+    } else if (Age == 2) {
         ageScore = 20;
-    } else if (Age = 1) {
+    } else if (Age == 1) {
         ageScore = 30;
     }
 
     // Get pressureScore
-    var pressure = document.getElementById("pressureSelect").value;
+    var pressure = document.getElementById("pressureSelect").selectedOptions[0].value;
     // Initialize pressureScore
     var pressureScore;
     // pressureScore points system
-    if (pressure = 5) {
+    if (pressure == 5) {
         pressureScore = 0;
-    } else if (pressure = 4) {
+    } else if (pressure == 4) {
         pressureScore = 15;
-    } else if (pressure = 3) {
+    } else if (pressure == 3) {
         pressureScore = 30;
-    } else if (pressure = 2) {
+    } else if (pressure == 2) {
         pressureScore = 75;
-    } else if (pressure = 1) {
+    } else if (pressure == 1) {
         pressureScore = 100;
     }
 
     //get familyScore
-    var family = domcument.getElementById("familySelect").value;
+    var family = domcument.getElementById("familySelect").selectedOptions[0].value;
     // Initialize familyScore
     var familyScore;
     // familyScore points system
-    if (family = 3) {
+    if (family == 3) {
         familyScore = 10;
-    } else if (family = 2) {
+    } else if (family == 2) {
         familyScore = 10;
-    } else if (family = 1) {
+    } else if (family == 1) {
         familyScore = 10;
     }
     
-	// Calculates the totalCompatability score
+	// Calculates the totalRisk score
 	let totalRiskScore = BMIscore + ageScore + pressureScore + familyScore;
+		console.log("rc="+ totalRiskScore);
 
 	document.getElementById("totalRisk").innerHTML = "Your total risk score is: " + totalRiskScore;
 
-  // Display message based on compatibility percentage
+  // Display message based on totalRisk score
 	let message;
 	if (totalRiskScore <=20) {
 		message = "You are at a low risk for health insurance.";
-	} else if (compatibilityPercentage <=50) {
+	} else if (totalRiskScore <=50) {
 		message = "You are at a moderate risk for health insurance.";
-	} else if (compatibilityPercentage <=75) {
+	} else if (totalRiskScore <=75) {
 		message = "You are at a high risk for health insurance.";
     } else {
         message = "You are not able to get health insurance."
