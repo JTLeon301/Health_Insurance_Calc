@@ -78,6 +78,8 @@ console.log("Finding your Insurance Risk!");
 function calculateRisk() {
 	console.log("calculateRisk()");
 
+
+
 	// Current values of the dropdown menu
 	let ques1Response = document.getElementById("heightSelect").selectedOptions[0].value;
 	let ques2Response = document.getElementById("weightSelect").selectedOptions[0].value;
@@ -159,7 +161,7 @@ function calculateRisk() {
     }
 
     //get familyScore
-    var family = domcument.getElementById("familySelect").selectedOptions[0].value;
+    var family = document.getElementById("familySelect").selectedOptions[0].value;
     // Initialize familyScore
     var familyScore;
     // familyScore points system
@@ -170,15 +172,13 @@ function calculateRisk() {
     } else if (family == 1) {
         familyScore = 10;
     }
-    
 	// Calculates the totalRisk score
 	let totalRiskScore = BMIscore + ageScore + pressureScore + familyScore;
 		console.log("rc="+ totalRiskScore);
 
 	document.getElementById("totalRisk").innerHTML = "Your total risk score is: " + totalRiskScore;
-
-  // Display message based on totalRisk score
-	let message;
+	 // Display message based on totalRisk score
+	 let message;
 	if (totalRiskScore <=20) {
 		message = "You are at a low risk for health insurance.";
 	} else if (totalRiskScore <=50) {
@@ -188,6 +188,9 @@ function calculateRisk() {
     } else {
         message = "You are not able to get health insurance."
   }
+
+
+
 	// Display the message
 	document.getElementById("totalRisk").innerHTML += "<br>" + message;
 }
